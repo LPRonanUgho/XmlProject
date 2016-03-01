@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by ronan on 01/03/16.
  */
-public class Conference {
+public class Conference implements Comparable<Conference> {
     private Edition edition;
     private List<Article> articles;
 
@@ -37,5 +37,10 @@ public class Conference {
                 "edition=" + edition +
                 ", articles=" + articles +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Conference conference) {
+        return getEdition().getDateFin().compareTo(conference.getEdition().getDateFin());
     }
 }
