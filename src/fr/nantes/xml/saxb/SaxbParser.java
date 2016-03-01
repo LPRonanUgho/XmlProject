@@ -61,7 +61,7 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
     @Override
     public void parseXML() {
         parseDocument();
-        XmlUtils.generateHTML(conferences);
+        XmlUtils.generateHomePage(conferences);
     }
 
     private void parseDocument() {

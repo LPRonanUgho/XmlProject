@@ -112,6 +112,16 @@ public class Article {
         this.keywords = keywords;
     }
 
+    public Affiliation getAffiliationById(final int affiliationId) {
+        for (final Affiliation affiliation : affiliations) {
+            if(affiliationId == affiliation.getAffiliationId()) {
+                return affiliation;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Article{" +

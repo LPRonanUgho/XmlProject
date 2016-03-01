@@ -31,6 +31,16 @@ public class Conference implements Comparable<Conference> {
         this.articles = articles;
     }
 
+    public Article getArticleById(final String id) {
+        for (final Article article : articles) {
+             if(id.equalsIgnoreCase(article.getId())) {
+                return article;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Conference{" +
