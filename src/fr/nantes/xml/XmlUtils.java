@@ -1,6 +1,5 @@
 package fr.nantes.xml;
 
-import fr.nantes.xml.saxb.objects.Article;
 import fr.nantes.xml.saxb.objects.Conference;
 
 import java.io.File;
@@ -8,9 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -29,12 +26,9 @@ public class XmlUtils {
         //Le repertoire source du fichier à créer :
         final String DIRECTORY = repCourant + "/" + HTML_PATH;
 
-        //Déclaration des variables utiles
-        PrintWriter writer;
-
         try {
             //Instantiation du PrintWriter avec le chemin du fichier en paramètre
-            writer = new PrintWriter(DIRECTORY + OUTPUT_FILE_NAME, "UTF-8");
+            PrintWriter writer = new PrintWriter(DIRECTORY + OUTPUT_FILE_NAME, "UTF-8");
             //Ecriture de la chaine dans le fichier
             writer.write(html);
             //Fermeture du fichier
@@ -52,8 +46,8 @@ public class XmlUtils {
     }
 
     public static void generateHTML(List<Conference> conferences) {
-        StringBuilder html = new StringBuilder();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
+        final StringBuilder html = new StringBuilder();
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
 
         html.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" +
                     "<html lang=\"fr\">\n" +
@@ -128,10 +122,15 @@ public class XmlUtils {
         Collections.sort(conferences, Collections.reverseOrder());
 
        for (Conference conference : conferences) {
-            html.append("<a href=\"\">" + conference.getEdition().getAcronyme() + " : " + conference.getEdition().getTitre() + "</a><br>\n" +
-                    "    Organisation : " + conference.getEdition().getPresidents() + "<br>\n" +
-                    "    Date et lieu: " + conference.getEdition().getDateDebut().getDay() + " au " + simpleDateFormat.format(conference.getEdition().getDateFin()) + ", " + conference.getEdition().getVille() + ", " + conference.getEdition().getPays() + ".<br>\n" +
-                    "    <br>");
+            html.append("<a href=\"\">" + conference.getEdition().getAcronyme() +
+                    " : " + conference.getEdition().getTitre() + "</a><br>\n" +
+                    "Organisation : " + conference.getEdition().getPresidents() + "<br>\n" +
+                    "Date et lieu: " +
+                    conference.getEdition().getDateDebut().getDay() +
+                    " au " +
+                    simpleDateFormat.format(conference.getEdition().getDateFin()) +
+                    ", " + conference.getEdition().getVille() +
+                    ", " + conference.getEdition().getPays() + ".<br>\n <br>");
         }
 
         html.append("</div>\n" +
@@ -139,7 +138,5 @@ public class XmlUtils {
                 "</html>");
 
         saveInFile(html.toString());
-
-
     }
 }

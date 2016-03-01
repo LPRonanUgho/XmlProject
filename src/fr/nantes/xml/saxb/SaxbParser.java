@@ -45,7 +45,24 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
     private boolean nodeAuteurs = false;
     private boolean nodeAffilitions = false;
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
+
+    /**
+     * Constructor
+     * @param xmlFileName
+     */
+    public SaxbParser(String xmlFileName) {
+        this.xmlFileName = xmlFileName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void parseXML() {
+        parseDocument();
+        XmlUtils.generateHTML(conferences);
+    }
 
     private void parseDocument() {
         // parse
@@ -280,18 +297,5 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
     @Override
     public void characters(char[] ac, int i, int j) throws SAXException {
         tmpValue = new String(ac, i, j);
-    }
-
-    public SaxbParser(String xmlFileName) {
-        this.xmlFileName = xmlFileName;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void parseXML() {
-        parseDocument();
-        XmlUtils.generateHTML(conferences);
     }
 }
