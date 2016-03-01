@@ -1,4 +1,4 @@
-package fr.iut.nantes.xml;
+package fr.nantes.xml;
 
 /**
  * Created by ughostephan on 01/03/2016.

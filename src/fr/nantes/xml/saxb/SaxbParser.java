@@ -1,6 +1,6 @@
-package fr.iut.nantes.xml.saxb;
+package fr.nantes.xml.saxb;
 
-import fr.iut.nantes.xml.XMLParserInterface;
+import fr.nantes.xml.XMLParserInterface;
 
 /**
  * Created by ughostephan on 01/03/2016.
