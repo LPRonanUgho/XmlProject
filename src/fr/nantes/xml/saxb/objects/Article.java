@@ -16,4 +16,84 @@ public class Article {
     private String mots_cles;
     private String abstract_libelle;
     private String keywords;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
+
+    public List<Auteur> getAuteurs() {
+        return auteurs;
+    }
+
+    public void setAuteurs(List<Auteur> auteurs) {
+        this.auteurs = auteurs;
+    }
+
+    public List<Affiliation> getAffiliations() {
+        return affiliations;
+    }
+
+    public void setAffiliations(List<Affiliation> affiliations) {
+        this.affiliations = affiliations;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
+    public String getMots_cles() {
+        return mots_cles;
+    }
+
+    public void setMots_cles(String mots_cles) {
+        this.mots_cles = mots_cles;
+    }
+
+    public String getAbstract_libelle() {
+        return abstract_libelle;
+    }
+
+    public void setAbstract_libelle(String abstract_libelle) {
+        this.abstract_libelle = abstract_libelle;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
 }
