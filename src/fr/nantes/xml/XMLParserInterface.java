@@ -8,4 +8,6 @@ public interface XMLParserInterface {
      * Méthode permettant de parser le fichier XML en fichiers HTML
      */
     void parseXML();
+
+
 }
