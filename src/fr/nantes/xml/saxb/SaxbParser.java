@@ -1,6 +1,7 @@
 package fr.nantes.xml.saxb;
 
 import fr.nantes.xml.XMLParserInterface;
+import fr.nantes.xml.XmlUtils;
 import fr.nantes.xml.saxb.objects.*;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -10,7 +11,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,12 +59,6 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
             System.err.println("SAXException : xml not well formed");
         } catch (IOException e) {
             System.err.println("IO error");
-        }
-    }
-
-    private void printHtml() {
-        for (Conference tmpC : conferences) {
-            System.out.println(tmpC.toString());
         }
     }
 
@@ -298,6 +292,6 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
     @Override
     public void parseXML() {
         parseDocument();
-        printHtml();
+        XmlUtils.generateHTML(conferences);
     }
 }
