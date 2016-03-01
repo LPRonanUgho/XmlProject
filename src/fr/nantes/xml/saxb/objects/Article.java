@@ -1,5 +1,6 @@
 package fr.nantes.xml.saxb.objects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,10 +13,16 @@ public class Article {
     private List<Affiliation> affiliations;
     private String titre;
     private String type;
+    private String pages;
     private String resume;
     private String mots_cles;
     private String abstract_libelle;
     private String keywords;
+
+    public Article() {
+        this.auteurs = new ArrayList<>();
+        this.affiliations = new ArrayList<>();
+    }
 
     public String getId() {
         return id;
@@ -63,6 +70,14 @@ public class Article {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getPages() {
+        return pages;
+    }
+
+    public void setPages(String pages) {
+        this.pages = pages;
     }
 
     public String getResume() {

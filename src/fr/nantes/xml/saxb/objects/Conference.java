@@ -1,5 +1,6 @@
 package fr.nantes.xml.saxb.objects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,6 +9,11 @@ import java.util.List;
 public class Conference {
     private Edition edition;
     private List<Article> articles;
+
+    public Conference() {
+        this.edition = new Edition();
+        this.articles = new ArrayList<>();
+    }
 
     public Edition getEdition() {
         return edition;

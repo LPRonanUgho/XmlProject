@@ -1,5 +1,6 @@
 package fr.nantes.xml.saxb.objects;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  */
 public class Edition {
     private String acronyme;
-    private String title;
+    private String titre;
     private String ville;
     private String pays;
     private Date dateDebut;
@@ -19,6 +20,13 @@ public class Edition {
     private String siteWeb;
     private List<String> meilleurArticle;
 
+    public Edition() {
+        this.presidents = new ArrayList<>();
+        this.typeArticles = new ArrayList<>();
+        this.statistiques = new ArrayList<>();
+        this.meilleurArticle = new ArrayList<>();
+    }
+
     public String getAcronyme() {
         return acronyme;
     }
@@ -27,12 +35,12 @@ public class Edition {
         this.acronyme = acronyme;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public String getVille() {
@@ -111,7 +119,7 @@ public class Edition {
     public String toString() {
         return "Edition{" +
                 "acronyme='" + acronyme + '\'' +
-                ", title='" + title + '\'' +
+                ", titre='" + titre + '\'' +
                 ", ville='" + ville + '\'' +
                 ", pays='" + pays + '\'' +
                 ", dateDebut=" + dateDebut +
