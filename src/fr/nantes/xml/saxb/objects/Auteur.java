@@ -31,4 +31,13 @@ public class Auteur {
     public void setAffiliationId(int affiliationId) {
         this.affiliationId = affiliationId;
     }
+
+    @Override
+    public String toString() {
+        return "Auteur{" +
+                "nom='" + nom + '\'' +
+                ", email='" + email + '\'' +
+                ", affiliationId=" + affiliationId +
+                '}';
+    }
 }

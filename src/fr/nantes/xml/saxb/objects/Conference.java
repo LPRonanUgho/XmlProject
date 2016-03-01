@@ -24,4 +24,12 @@ public class Conference {
     public void setArticles(List<Article> articles) {
         this.articles = articles;
     }
+
+    @Override
+    public String toString() {
+        return "Conference{" +
+                "edition=" + edition +
+                ", articles=" + articles +
+                '}';
+    }
 }

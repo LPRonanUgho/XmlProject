@@ -106,4 +106,21 @@ public class Edition {
     public void setMeilleurArticle(List<String> meilleurArticle) {
         this.meilleurArticle = meilleurArticle;
     }
+
+    @Override
+    public String toString() {
+        return "Edition{" +
+                "acronyme='" + acronyme + '\'' +
+                ", title='" + title + '\'' +
+                ", ville='" + ville + '\'' +
+                ", pays='" + pays + '\'' +
+                ", dateDebut=" + dateDebut +
+                ", dateFin=" + dateFin +
+                ", presidents=" + presidents +
+                ", typeArticles=" + typeArticles +
+                ", statistiques=" + statistiques +
+                ", siteWeb='" + siteWeb + '\'' +
+                ", meilleurArticle=" + meilleurArticle +
+                '}';
+    }
 }

@@ -22,4 +22,12 @@ public class Affiliation {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Affiliation{" +
+                "affiliationId=" + affiliationId +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
