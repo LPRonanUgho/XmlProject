@@ -31,4 +31,13 @@ public class Acceptations {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Acceptations{" +
+                "id='" + id + '\'' +
+                ", soumissions=" + soumissions +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

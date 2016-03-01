@@ -96,4 +96,20 @@ public class Article {
     public void setKeywords(String keywords) {
         this.keywords = keywords;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id='" + id + '\'' +
+                ", session='" + session + '\'' +
+                ", auteurs=" + auteurs +
+                ", affiliations=" + affiliations +
+                ", titre='" + titre + '\'' +
+                ", type='" + type + '\'' +
+                ", resume='" + resume + '\'' +
+                ", mots_cles='" + mots_cles + '\'' +
+                ", abstract_libelle='" + abstract_libelle + '\'' +
+                ", keywords='" + keywords + '\'' +
+                '}';
+    }
 }
