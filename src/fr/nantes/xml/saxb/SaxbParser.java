@@ -10,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,9 +62,7 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
         }
     }
 
-    private void printDatas() {
-        //System.out.println(conferences.size());
-
+    private void printHtml() {
         for (Conference tmpC : conferences) {
             System.out.println(tmpC.toString());
         }
@@ -299,6 +298,6 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
     @Override
     public void parseXML() {
         parseDocument();
-        printDatas();
+        printHtml();
     }
 }

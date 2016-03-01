@@ -121,6 +121,7 @@ public class Article {
                 ", affiliations=" + affiliations +
                 ", titre='" + titre + '\'' +
                 ", type='" + type + '\'' +
+                ", pages='" + pages + '\'' +
                 ", resume='" + resume + '\'' +
                 ", mots_cles='" + mots_cles + '\'' +
                 ", abstract_libelle='" + abstract_libelle + '\'' +

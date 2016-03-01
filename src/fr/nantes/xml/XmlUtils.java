@@ -5,4 +5,9 @@ package fr.nantes.xml;
  */
 public class XmlUtils {
     public static final String XML_FILE_NAME = "ressources/TALN-RECITAL-BIB.xml";
+    public static final String OUTPUT_FILE_NAME = "TALN_RECITAL.html";
+
+    public static void printHtml() {
+
+    }
 }
