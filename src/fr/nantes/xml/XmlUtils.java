@@ -25,7 +25,10 @@ public class XmlUtils {
     public static final String HOME_PAGE_TEMPLATE_NAME = "HOME_PAGE_TEMPLATE.html";
     public static final String CONFERENCE_PAGE_TEMPLATE_NAME = "CONFERENCE_PAGE_TEMPLATE.html";
 
-    public static void saveInFile(final String html, final String filePath, final String fileName) {
+    private static final SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
+    private static final SimpleDateFormat fullDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
+
+    private static void saveInFile(final String html, final String filePath, final String fileName) {
         //Récupération du chemin courant
         final File repCourant = new java.io.File(new java.io.File("").getAbsolutePath());
 
@@ -57,54 +60,46 @@ public class XmlUtils {
     public static void generateHomePage(List<Conference> conferences) {
         final String htmlTemplateFile = TEMPLATES_PATH + HOME_PAGE_TEMPLATE_NAME;
 
-        String htmlString = "";
-        try {
-            htmlString = new Scanner(new File(htmlTemplateFile)).useDelimiter("\\Z").next();
-        } catch (FileNotFoundException e) {
-            //TODO : Error - file not found
-        }
+        String htmlString = readTemplate(htmlTemplateFile);
 
-        htmlString = htmlString.replace("$ressourcesPath", HTML_RESSOURSES_PATH);
-        htmlString = htmlString.replace("$conferences", getConferences(conferences));
+        if (htmlString != null) {
+            htmlString = htmlString.replace("$ressourcesPath", HTML_RESSOURSES_PATH);
+            htmlString = htmlString.replace("$conferences", getConferences(conferences));
+        }
 
         saveInFile(htmlString, HTML_PATH, HOME_PAGE_FILE_NAME);
     }
 
-    public static String generateConferencePage(Conference conference) {
+    private static String generateConferencePage(Conference conference) {
         final String fileName = conference.getEdition().getAcronyme().replace("'", "_").toUpperCase() + ".html";
-
-        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
 
         final String htmlTemplateFile = TEMPLATES_PATH + CONFERENCE_PAGE_TEMPLATE_NAME;
 
-        String htmlString = "";
-        try {
-            htmlString = new Scanner(new File(htmlTemplateFile)).useDelimiter("\\Z").next();
-        } catch (FileNotFoundException e) {
-            //TODO : Error - file not found
+        String htmlString = readTemplate(htmlTemplateFile);
+
+        if (htmlString != null) {
+            htmlString = htmlString.replace("$ressourcesPath", HTML_RESSOURSES_PATH);
+            htmlString = htmlString.replace("$homePage", HOME_PAGE_FILE_NAME);
+
+            htmlString = htmlString.replace("$acronyme", conference.getEdition().getAcronyme());
+            htmlString = htmlString.replace("$titre", conference.getEdition().getTitre());
+            htmlString = htmlString.replace("$presidents", getPresidentsFormat(conference.getEdition().getPresidents()));
+            htmlString = htmlString.replace("$ville", conference.getEdition().getVille());
+            htmlString = htmlString.replace("$pays", conference.getEdition().getPays());
+            htmlString = htmlString.replace("$siteWeb", conference.getEdition().getSiteWeb());
+            htmlString = htmlString.replace("$dateDebut", dayFormat.format(conference.getEdition().getDateDebut()));
+            htmlString = htmlString.replace("$dateFin", fullDateFormat.format(conference.getEdition().getDateFin()));
+            htmlString = htmlString.replace("$statistiques", getConferenceStats(conference.getEdition().getStatistiques()));
+            htmlString = htmlString.replace("$bestArticles", getBestArticle(conference));
+            htmlString = htmlString.replace("$articles", getArticles(conference));
         }
-
-        htmlString = htmlString.replace("$ressourcesPath", HTML_RESSOURSES_PATH);
-        htmlString = htmlString.replace("$homePage", HOME_PAGE_FILE_NAME);
-
-        htmlString = htmlString.replace("$acronyme", conference.getEdition().getAcronyme());
-        htmlString = htmlString.replace("$titre", conference.getEdition().getTitre());
-        htmlString = htmlString.replace("$presidents", getPresidentsFormat(conference.getEdition().getPresidents()));
-        htmlString = htmlString.replace("$ville", conference.getEdition().getVille());
-        htmlString = htmlString.replace("$pays", conference.getEdition().getPays());
-        htmlString = htmlString.replace("$siteWeb", conference.getEdition().getSiteWeb());
-        htmlString = htmlString.replace("$dateDebut", String.valueOf(conference.getEdition().getDateDebut().getDay()));
-        htmlString = htmlString.replace("$dateFin", simpleDateFormat.format(conference.getEdition().getDateFin()));
-        htmlString = htmlString.replace("$statistiques", getConferenceStats(conference.getEdition().getStatistiques()));
-        htmlString = htmlString.replace("$bestArticles", getBestArticle(conference));
-        htmlString = htmlString.replace("$articles", getArticles(conference));
 
         saveInFile(htmlString, HTML_PATH + CONFERENCES_PATH, fileName);
 
         return CONFERENCES_PATH + fileName;
     }
 
-    public static String getPresidentsFormat(final List<String> presidents) {
+    private static String getPresidentsFormat(final List<String> presidents) {
         String formatedStr = "";
 
         for (int i = 0; i < presidents.size(); i++) {
@@ -120,8 +115,7 @@ public class XmlUtils {
         return formatedStr;
     }
 
-    public static String getConferences(final List<Conference> conferences) {
-        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
+    private static String getConferences(final List<Conference> conferences) {
         String formatedStr = "";
 
         Collections.sort(conferences, Collections.reverseOrder());
@@ -132,10 +126,10 @@ public class XmlUtils {
             formatedStr += "<a href=\"" + conferencePageUrl + "\">" + conference.getEdition().getAcronyme() +
                     " : " + conference.getEdition().getTitre() + "</a><br>\n" +
                     "Organisation : " + getPresidentsFormat(conference.getEdition().getPresidents()) + "<br>\n" +
-                    "Date et lieu: " +
-                    conference.getEdition().getDateDebut().getDay() +
+                    "Date et lieu: Du " +
+                    dayFormat.format(conference.getEdition().getDateDebut()) +
                     " au " +
-                    simpleDateFormat.format(conference.getEdition().getDateFin()) +
+                    fullDateFormat.format(conference.getEdition().getDateFin()) +
                     ", " + conference.getEdition().getVille() +
                     ", " + conference.getEdition().getPays() + ".<br>\n <br>";
         }
@@ -143,7 +137,7 @@ public class XmlUtils {
         return formatedStr;
     }
 
-    public static String getConferenceStats(final List<Acceptations> stats) {
+    private static String getConferenceStats(final List<Acceptations> stats) {
         String formatedStr = "";
 
         for (Acceptations a : stats) {
@@ -153,7 +147,7 @@ public class XmlUtils {
         return formatedStr;
     }
 
-    public static String getBestArticle(final Conference conference) {
+    private static String getBestArticle(final Conference conference) {
         String formatedStr = "";
 
         for (String articleId : conference.getEdition().getMeilleurArticle()) {
@@ -168,7 +162,7 @@ public class XmlUtils {
         return formatedStr;
     }
 
-    public static String getAuteursFormat(final Article article) {
+    private static String getAuteursFormat(final Article article) {
         final List<Auteur> auteurs = article.getAuteurs();
 
         String formatedStr = "";
@@ -217,7 +211,7 @@ public class XmlUtils {
         return formatedStr;
     }
 
-    public static String getArticleFormat(final List<Article> articles) {
+    private static String getArticleFormat(final List<Article> articles) {
         Collections.sort(articles);
 
         String formatedStr = "";
@@ -229,7 +223,7 @@ public class XmlUtils {
         return formatedStr;
     }
 
-    public static String getArticles(final Conference conference) {
+    private static String getArticles(final Conference conference) {
         String formatedStr = "";
 
         for (Type type : conference.getEdition().getTypeArticles()) {
@@ -241,5 +235,15 @@ public class XmlUtils {
         }
 
         return formatedStr;
+    }
+
+    private static String readTemplate(String templatePath) {
+        try {
+            return new Scanner(new File(templatePath)).useDelimiter("\\Z").next();
+        } catch (FileNotFoundException e) {
+            System.err.println("Template not found");
+        }
+
+        return null;
     }
 }
