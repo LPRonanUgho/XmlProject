@@ -19,7 +19,7 @@ public class Conference implements Comparable<Conference> {
 
     public Conference() {
         this.edition = new Edition();
-        this.articles = new ArrayList<>();
+        this.articles = new ArrayList<Article>();
     }
 
     public Edition getEdition() {
@@ -51,7 +51,7 @@ public class Conference implements Comparable<Conference> {
     }
 
     public List<Article> getArticleByType(final String typeId) {
-        ArrayList<Article> articlesFilteredByType = new ArrayList<>();
+        ArrayList<Article> articlesFilteredByType = new ArrayList<Article>();
 
         for (final Article article : this.articles) {
             if (article.getType().equalsIgnoreCase(typeId)) {
@@ -70,7 +70,6 @@ public class Conference implements Comparable<Conference> {
                 '}';
     }
 
-    @Override
     public int compareTo(Conference conference) {
         return getEdition().getDateFin().compareTo(conference.getEdition().getDateFin());
     }

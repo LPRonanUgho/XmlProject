@@ -58,7 +58,6 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
     /**
      * {@inheritDoc}
      */
-    @Override
     public List<Conference> parseXML() {
         parseDocument();
         return this.conferences;
@@ -108,11 +107,11 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
             tmpArticle.setSession(attributes.getValue("session"));
         }
         if (elementName.equalsIgnoreCase("auteurs") && nodeArticle) {
-            tmpListAuteurs = new ArrayList<>();
+            tmpListAuteurs = new ArrayList<Auteur>();
         }
         if (elementName.equalsIgnoreCase("auteur") && nodeAuteurs) {
             tmpAuteur = new Auteur();
-            tmpListAffiliationsId = new ArrayList<>();
+            tmpListAffiliationsId = new ArrayList<Integer>();
         }
         if (elementName.equalsIgnoreCase("affiliation") && nodeAffilitions) {
             tmpAffiliation = new Affiliation();

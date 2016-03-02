@@ -24,8 +24,8 @@ public class Article implements Comparable<Article> {
     private String keywords;
 
     public Article() {
-        this.auteurs = new ArrayList<>();
-        this.affiliations = new ArrayList<>();
+        this.auteurs = new ArrayList<Auteur>();
+        this.affiliations = new ArrayList<Affiliation>();
     }
 
     public String getId() {
@@ -150,7 +150,6 @@ public class Article implements Comparable<Article> {
                 '}';
     }
 
-    @Override
     public int compareTo(Article article) {
         if (auteurs.size() != 0 && article.getAuteurs().size() != 0) {
             return auteurs.get(0).getNom().compareTo(article.getAuteurs().get(0).getNom());

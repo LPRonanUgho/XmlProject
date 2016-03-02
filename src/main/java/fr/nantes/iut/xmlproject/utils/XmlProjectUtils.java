@@ -188,7 +188,7 @@ public class XmlProjectUtils {
         }
 
         //Affiliations
-        Set<String> tmpAffiliationsId = new HashSet<>();
+        Set<String> tmpAffiliationsId = new HashSet<String>();
 
         for (Auteur auteur : auteurs) {
             for (int id : auteur.getAffiliationsId()) {
@@ -197,7 +197,7 @@ public class XmlProjectUtils {
         }
 
         if (tmpAffiliationsId.size() != 0) {
-            List<String> affiliationsId = new ArrayList<>(tmpAffiliationsId);
+            List<String> affiliationsId = new ArrayList<String>(tmpAffiliationsId);
 
             formatedStr += " (";
             for (int i = 0; i < affiliationsId.size(); i++) {

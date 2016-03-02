@@ -27,7 +27,6 @@ public class JaxbParser implements XMLParserInterface {
     /**
      * {@inheritDoc}
      */
-    @Override
     public List<Conference> parseXML() {
         try {
             JAXBContext jc = JAXBContext.newInstance(Conferences.class);

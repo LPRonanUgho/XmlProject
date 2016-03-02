@@ -31,10 +31,10 @@ public class Edition {
     private List<String> meilleurArticle;
 
     public Edition() {
-        this.presidents = new ArrayList<>();
-        this.typeArticles = new ArrayList<>();
-        this.statistiques = new ArrayList<>();
-        this.meilleurArticle = new ArrayList<>();
+        this.presidents = new ArrayList<String>();
+        this.typeArticles = new ArrayList<Type>();
+        this.statistiques = new ArrayList<Acceptations>();
+        this.meilleurArticle = new ArrayList<String>();
     }
 
     public String getAcronyme() {
