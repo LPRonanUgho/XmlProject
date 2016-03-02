@@ -16,7 +16,7 @@ public class LaunchSaxbParser {
         final List<Conference> conferences = new SaxbParser(XmlProjectUtils.XML_FILE_NAME).parseXML();
 
         if (conferences != null) {
-            System.out.println(conferences.size() + " conférences ont été récupérés du fichier XML\n");
+            System.out.println(conferences.size() + " conférences ont été récupérées du fichier XML\n");
             XmlProjectUtils.generateHomePage(conferences);
         }
     }

@@ -248,7 +248,7 @@ public class XmlProjectUtils {
         try {
             return new Scanner(new File(templatePath)).useDelimiter("\\Z").next();
         } catch (FileNotFoundException e) {
-            System.err.println("Template not found");
+            System.err.println("Template \"" + templatePath + "\" not found");
         }
 
         return null;

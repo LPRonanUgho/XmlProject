@@ -16,7 +16,7 @@ public class LaunchJaxbParser {
         final List<Conference> conferences = new JaxbParser(XmlProjectUtils.XML_FILE_NAME).parseXML();
 
         if (conferences != null) {
-            System.out.println(conferences.size() + " conférences ont été récupérés du fichier XML\n");
+            System.out.println(conferences.size() + " conférences ont été récupérées du fichier XML\n");
             XmlProjectUtils.generateHomePage(conferences);
         }
     }
