@@ -1,8 +1,11 @@
 package fr.nantes.xml.objects;
 
+import javax.xml.bind.annotation.*;
+
 /**
  * Created by ronan on 01/03/16.
  */
+@XmlRootElement( name = "affiliation" )
 public class Affiliation {
     private int affiliationId;
     private String name;
@@ -11,6 +14,7 @@ public class Affiliation {
         return affiliationId;
     }
 
+    @XmlAttribute( name = "affiliationId")
     public void setAffiliationId(int affiliationId) {
         this.affiliationId = affiliationId;
     }
@@ -19,6 +23,7 @@ public class Affiliation {
         return name;
     }
 
+    @XmlValue
     public void setName(String name) {
         this.name = name;
     }

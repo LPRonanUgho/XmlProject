@@ -1,5 +1,6 @@
 package fr.nantes.xml;
 
+import fr.nantes.xml.jaxb.JaxbParser;
 import fr.nantes.xml.saxb.SaxbParser;
 
 /**
@@ -9,10 +10,10 @@ public class Main {
 
     public static void main(String args[]) {
 
-        new SaxbParser(XmlUtils.XML_FILE_NAME).parseXML();
+        //new SaxbParser(XmlUtils.XML_FILE_NAME).parseXML();
 
         // OR
 
-        //new JaxbParser(XmlUtils.XML_FILE_NAME).parseXML();
+        new JaxbParser(XmlUtils.XML_FILE_NAME).parseXML();
     }
 }

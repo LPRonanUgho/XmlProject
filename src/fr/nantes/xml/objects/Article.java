@@ -1,11 +1,15 @@
 package fr.nantes.xml.objects;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by ronan on 01/03/16.
  */
+@XmlRootElement( name = "article" )
+@XmlType( propOrder = { "auteurs", "affiliations", "titre", "type", "pages", "resume", "mots_cles",
+        "abstract_libelle", "keywords" } )
 public class Article implements Comparable<Article> {
     private String id;
     private String session;
@@ -28,6 +32,7 @@ public class Article implements Comparable<Article> {
         return id;
     }
 
+    @XmlAttribute(name = "id")
     public void setId(String id) {
         this.id = id;
     }
@@ -36,6 +41,7 @@ public class Article implements Comparable<Article> {
         return session;
     }
 
+    @XmlAttribute(name = "session")
     public void setSession(String session) {
         this.session = session;
     }
@@ -44,6 +50,8 @@ public class Article implements Comparable<Article> {
         return auteurs;
     }
 
+    @XmlElementWrapper(name = "auteurs")
+    @XmlElement(name = "auteur")
     public void setAuteurs(List<Auteur> auteurs) {
         this.auteurs = auteurs;
     }
@@ -52,6 +60,8 @@ public class Article implements Comparable<Article> {
         return affiliations;
     }
 
+    @XmlElementWrapper(name = "affiliations")
+    @XmlElement(name = "affiliation")
     public void setAffiliations(List<Affiliation> affiliations) {
         this.affiliations = affiliations;
     }
@@ -100,6 +110,7 @@ public class Article implements Comparable<Article> {
         return abstract_libelle;
     }
 
+    @XmlElement( name = "abstract" )
     public void setAbstract_libelle(String abstract_libelle) {
         this.abstract_libelle = abstract_libelle;
     }

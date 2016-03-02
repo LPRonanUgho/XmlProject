@@ -1,5 +1,12 @@
 package fr.nantes.xml.objects;
 
+import fr.nantes.xml.jaxb.JaxbDateAdapter;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +14,9 @@ import java.util.List;
 /**
  * Created by ronan on 01/03/16.
  */
+@XmlRootElement( name = "edition" )
+@XmlType( propOrder = { "acronyme", "titre", "ville", "pays", "dateDebut", "dateFin", "presidents",
+"typeArticles", "statistiques", "siteWeb", "meilleurArticle" } )
 public class Edition {
     private String acronyme;
     private String titre;
@@ -63,6 +73,7 @@ public class Edition {
         return dateDebut;
     }
 
+    @XmlJavaTypeAdapter(JaxbDateAdapter.class)
     public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
     }
@@ -71,6 +82,7 @@ public class Edition {
         return dateFin;
     }
 
+    @XmlJavaTypeAdapter(JaxbDateAdapter.class)
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
@@ -79,6 +91,8 @@ public class Edition {
         return presidents;
     }
 
+    @XmlElementWrapper(name = "presidents")
+    @XmlElement(name = "nom")
     public void setPresidents(List<String> presidents) {
         this.presidents = presidents;
     }
@@ -87,6 +101,8 @@ public class Edition {
         return typeArticles;
     }
 
+    @XmlElementWrapper(name = "typeArticles")
+    @XmlElement(name = "type")
     public void setTypeArticles(List<Type> typeArticles) {
         this.typeArticles = typeArticles;
     }
@@ -95,6 +111,8 @@ public class Edition {
         return statistiques;
     }
 
+    @XmlElementWrapper(name = "statistiques")
+    @XmlElement(name = "acceptations")
     public void setStatistiques(List<Acceptations> statistiques) {
         this.statistiques = statistiques;
     }
@@ -111,6 +129,8 @@ public class Edition {
         return meilleurArticle;
     }
 
+    @XmlElementWrapper(name = "meilleurArticle")
+    @XmlElement(name = "articleId")
     public void setMeilleurArticle(List<String> meilleurArticle) {
         this.meilleurArticle = meilleurArticle;
     }

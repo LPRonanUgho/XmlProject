@@ -1,14 +1,19 @@
 package fr.nantes.xml.objects;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
  * Created by ronan on 01/03/16.
  */
+@XmlRootElement( name = "auteur" )
+@XmlType( propOrder = { "nom", "email", "affiliationsId" } )
 public class Auteur {
     private String nom;
     private String email;
-    private List<Integer> affiliationId;
+    private List<Integer> affiliationsId;
 
     public String getNom() {
         return nom;
@@ -27,11 +32,12 @@ public class Auteur {
     }
 
     public List<Integer> getAffiliationsId() {
-        return affiliationId;
+        return affiliationsId;
     }
 
+    @XmlElement(name = "affiliationId")
     public void setAffiliationsId(List<Integer> affiliationId) {
-        this.affiliationId = affiliationId;
+        this.affiliationsId = affiliationId;
     }
 
     @Override
@@ -39,7 +45,7 @@ public class Auteur {
         return "Auteur{" +
                 "nom='" + nom + '\'' +
                 ", email='" + email + '\'' +
-                ", affiliations=" + affiliationId +
+                ", affiliations=" + affiliationsId +
                 '}';
     }
 }
