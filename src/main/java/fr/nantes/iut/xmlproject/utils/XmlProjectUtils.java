@@ -24,6 +24,7 @@ public class XmlProjectUtils {
     public static final String HOME_PAGE_FILE_NAME = "TALN_RECITAL.html";
     public static final String HOME_PAGE_TEMPLATE_NAME = "HOME_PAGE_TEMPLATE.html";
     public static final String CONFERENCE_PAGE_TEMPLATE_NAME = "CONFERENCE_PAGE_TEMPLATE.html";
+    public static final String CONFERENCE_ITEM_TEMPLATE_NAME = "CONFERENCE_ITEM_TEMPLATE.html";
 
     private static final SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
     private static final SimpleDateFormat fullDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
@@ -116,6 +117,8 @@ public class XmlProjectUtils {
     }
 
     private static String getConferences(final List<Conference> conferences) {
+        final String htmlTemplateFile = TEMPLATES_PATH + CONFERENCE_ITEM_TEMPLATE_NAME;
+
         String formatedStr = "";
 
         Collections.sort(conferences, Collections.reverseOrder());
@@ -123,15 +126,21 @@ public class XmlProjectUtils {
         for (Conference conference : conferences) {
             final String conferencePageUrl = generateConferencePage(conference);
 
-            formatedStr += "<a href=\"" + conferencePageUrl + "\">" + conference.getEdition().getAcronyme() +
-                    " : " + conference.getEdition().getTitre() + "</a><br>\n" +
-                    "Organisation : " + getPresidentsFormat(conference.getEdition().getPresidents()) + "<br>\n" +
-                    "Date et lieu: Du " +
-                    dayFormat.format(conference.getEdition().getDateDebut()) +
-                    " au " +
-                    fullDateFormat.format(conference.getEdition().getDateFin()) +
-                    ", " + conference.getEdition().getVille() +
-                    ", " + conference.getEdition().getPays() + ".<br>\n <br>";
+            String conferenceItemHtmlString = readTemplate(htmlTemplateFile);
+
+            if (conferenceItemHtmlString != null) {
+                conferenceItemHtmlString = conferenceItemHtmlString.replace("$conferencePageUrl", conferencePageUrl);
+
+                conferenceItemHtmlString = conferenceItemHtmlString.replace("$acronyme", conference.getEdition().getAcronyme());
+                conferenceItemHtmlString = conferenceItemHtmlString.replace("$titre", conference.getEdition().getTitre());
+                conferenceItemHtmlString = conferenceItemHtmlString.replace("$presidents", getPresidentsFormat(conference.getEdition().getPresidents()));
+                conferenceItemHtmlString = conferenceItemHtmlString.replace("$ville", conference.getEdition().getVille());
+                conferenceItemHtmlString = conferenceItemHtmlString.replace("$pays", conference.getEdition().getPays());
+                conferenceItemHtmlString = conferenceItemHtmlString.replace("$dateDebut", dayFormat.format(conference.getEdition().getDateDebut()));
+                conferenceItemHtmlString = conferenceItemHtmlString.replace("$dateFin", fullDateFormat.format(conference.getEdition().getDateFin()));
+            }
+
+            formatedStr += conferenceItemHtmlString;
         }
 
         return formatedStr;
