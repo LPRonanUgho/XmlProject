@@ -1,12 +1,14 @@
 package fr.nantes.xml.saxb.objects;
 
+import java.util.List;
+
 /**
  * Created by ronan on 01/03/16.
  */
 public class Auteur {
     private String nom;
     private String email;
-    private int affiliationId;
+    private List<Integer> affiliationId;
 
     public String getNom() {
         return nom;
@@ -24,11 +26,11 @@ public class Auteur {
         this.email = email;
     }
 
-    public int getAffiliationId() {
+    public List<Integer> getAffiliationsId() {
         return affiliationId;
     }
 
-    public void setAffiliationId(int affiliationId) {
+    public void setAffiliationsId(List<Integer> affiliationId) {
         this.affiliationId = affiliationId;
     }
 
@@ -37,7 +39,8 @@ public class Auteur {
         return "Auteur{" +
                 "nom='" + nom + '\'' +
                 ", email='" + email + '\'' +
-                ", affiliationId=" + affiliationId +
+                ", affiliations=" + affiliationId +
                 '}';
     }
 }
+

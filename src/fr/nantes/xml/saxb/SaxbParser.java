@@ -31,6 +31,7 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
     private Article tmpArticle;
     private ArrayList<Auteur> tmpListAuteurs;
     private Auteur tmpAuteur;
+    private List<Integer> tmpListAffiliationsId;
     private Affiliation tmpAffiliation;
 
     private boolean nodeEdition = false;
@@ -112,6 +113,7 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
         }
         if (elementName.equalsIgnoreCase("auteur") && nodeAuteurs) {
             tmpAuteur = new Auteur();
+            tmpListAffiliationsId = new ArrayList<>();
         }
         if (elementName.equalsIgnoreCase("affiliation") && nodeAffilitions) {
             tmpAffiliation = new Affiliation();
@@ -238,6 +240,7 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
             if(nodeArticle) {
                 if(nodeAuteurs) {
                     if(elementName.equalsIgnoreCase("auteur")) {
+                        tmpAuteur.setAffiliationsId(tmpListAffiliationsId);
                         tmpListAuteurs.add(tmpAuteur);
                     }
 
@@ -251,9 +254,9 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
                         }
                         if (elementName.equalsIgnoreCase("affiliationId")) {
                             try {
-                                tmpAuteur.setAffiliationId(Integer.parseInt(tmpValue));
-                            } catch ( NumberFormatException e) {
-                                tmpAuteur.setAffiliationId(0);
+                                tmpListAffiliationsId.add(Integer.parseInt(tmpValue));
+                            } catch (NumberFormatException e) {
+                                tmpListAffiliationsId.add(0);
                             }
                         }
                     }

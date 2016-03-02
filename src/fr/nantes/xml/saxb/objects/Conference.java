@@ -1,7 +1,9 @@
 package fr.nantes.xml.saxb.objects;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.sun.org.apache.xerces.internal.xs.LSInputList;
+import org.w3c.dom.ls.LSInput;
+
+import java.util.*;
 
 /**
  * Created by ronan on 01/03/16.
@@ -33,12 +35,24 @@ public class Conference implements Comparable<Conference> {
 
     public Article getArticleById(final String id) {
         for (final Article article : articles) {
-             if(id.equalsIgnoreCase(article.getId())) {
+            if(id.equalsIgnoreCase(article.getId())) {
                 return article;
             }
         }
 
         return null;
+    }
+
+    public List<Article> getArticleByType(final String typeId) {
+        ArrayList<Article> articlesFilteredByType = new ArrayList<>();
+
+        for (final Article article : this.articles) {
+            if(article.getType().equalsIgnoreCase(typeId)) {
+                articlesFilteredByType.add(article);
+            }
+        }
+
+        return articlesFilteredByType;
     }
 
     @Override

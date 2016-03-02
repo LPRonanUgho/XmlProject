@@ -1,19 +1,13 @@
 package fr.nantes.xml;
 
-import fr.nantes.xml.saxb.objects.Acceptations;
-import fr.nantes.xml.saxb.objects.Article;
-import fr.nantes.xml.saxb.objects.Auteur;
-import fr.nantes.xml.saxb.objects.Conference;
+import fr.nantes.xml.saxb.objects.*;
 
-import javax.swing.text.html.HTML;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by ronan on 01/03/16.
@@ -39,13 +33,13 @@ public class XmlUtils {
             writer.write(html);
             //Fermeture du fichier
             writer.close();
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             //Création du répertoire source si inexistant
             File dir = new File(DIRECTORY);
             dir.mkdirs();
             //Appelle à nouveau de la fonction pour créer le fichier
             saveInFile(html, filePath, fileName);
-        } catch(UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException e) {
             //Affichage de la trace en cas d'erreur d'encodage
             e.printStackTrace();
         }
@@ -56,79 +50,79 @@ public class XmlUtils {
         final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
 
         html.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" +
-                    "<html lang=\"fr\">\n" +
-                    "<head>\n" +
-                    "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\n" +
-                    "    <title>Conférence TALN/RECITAL</title>\n" +
-                    "    <link rel=\"stylesheet\" href=\"TALN_RECITAL_fichiers/structure.css\" type=\"text/css\">\n" +
-                    "    <link rel=\"stylesheet\" href=\"TALN_RECITAL_fichiers/styles.css\" type=\"text/css\">\n" +
-                    "</head>\n" +
-                    "<body dir=\"ltr\">\n" +
-                    "<style>\n" +
-                    "    .bouton A IMG {\n" +
-                    "        border: 0px;\n" +
-                    "    }\n" +
-                    "\n" +
-                    "    .bouton A:hover IMG {\n" +
-                    "        border: 0px;\n" +
-                    "        background-color: #FFFFFF;\n" +
-                    "        filter: alpha(opacity=100);\n" +
-                    "    }\n" +
-                    "\n" +
-                    "    .warning {\n" +
-                    "        margin-bottom: 10px;\n" +
-                    "        background-color: white;\n" +
-                    "    }\n" +
-                    "</style>\n" +
-                    "<div id=\"banniere\">\n" +
-                    "    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
-                    "        <tbody>\n" +
-                    "        <tr>\n" +
-                    "            <td class=\"bouton\">\n" +
-                    "              <a href=\"\" title=\"Accueil du site\">\n" +
-                    "                <img src=\"TALN_RECITAL_fichiers/logo.gif\" alt=\"Accueil du site\" border=\"0\">\n" +
-                    "              </a>\n" +
-                    "            </td>\n" +
-                    "            <td class=\"bouton\">\n" +
-                    "              <a href=\"\" title=\"Accueil du site\">\n" +
-                    "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub1.gif\" alt=\"Accueil du site\">\n" +
-                    "              </a>\n" +
-                    "            </td>\n" +
-                    "            <td class=\"bouton\">\n" +
-                    "              <a href=\"\" title=\"Adh�sion\">\n" +
-                    "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub3.gif\" alt=\"Adh�sion\">\n" +
-                    "              </a>\n" +
-                    "            </td>\n" +
-                    "            <td class=\"bouton\">\n" +
-                    "              <a href=\"\" title=\"Contact\">\n" +
-                    "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub5.gif\" alt=\"Contact\">\n" +
-                    "              </a>\n" +
-                    "            </td>\n" +
-                    "            <td class=\"bouton\">\n" +
-                    "              <a href=\"\" title=\"Plan du site\">\n" +
-                    "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub6.gif\" alt=\"Plan du site\">\n" +
-                    "              </a>\n" +
-                    "            </td>\n" +
-                    "        </tr>\n" +
-                    "      </tbody>\n" +
-                    "    </table>\n" +
-                    "\n" +
-                    "    <img src=\"TALN_RECITAL_fichiers/motif.gif\" height=\"20\" width=\"100%\">\n" +
-                    "</div>\n" +
-                    "\n" +
-                    "<div id=\"principal\" class=\"contenu\">\n" +
-                    "    <div class=\"cartouche\">\n" +
-                    "        <h1>Conférence TALN/RECITAL</h1>\n" +
-                    "    </div>\n" +
-                    "\n" +
-                    "    <h2>\n" +
-                    "        Les éditions de la conférence\n" +
-                    "    </h2>");
+                "<html lang=\"fr\">\n" +
+                "<head>\n" +
+                "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\n" +
+                "    <title>Conférence TALN/RECITAL</title>\n" +
+                "    <link rel=\"stylesheet\" href=\"TALN_RECITAL_fichiers/structure.css\" type=\"text/css\">\n" +
+                "    <link rel=\"stylesheet\" href=\"TALN_RECITAL_fichiers/styles.css\" type=\"text/css\">\n" +
+                "</head>\n" +
+                "<body dir=\"ltr\">\n" +
+                "<style>\n" +
+                "    .bouton A IMG {\n" +
+                "        border: 0px;\n" +
+                "    }\n" +
+                "\n" +
+                "    .bouton A:hover IMG {\n" +
+                "        border: 0px;\n" +
+                "        background-color: #FFFFFF;\n" +
+                "        filter: alpha(opacity=100);\n" +
+                "    }\n" +
+                "\n" +
+                "    .warning {\n" +
+                "        margin-bottom: 10px;\n" +
+                "        background-color: white;\n" +
+                "    }\n" +
+                "</style>\n" +
+                "<div id=\"banniere\">\n" +
+                "    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
+                "        <tbody>\n" +
+                "        <tr>\n" +
+                "            <td class=\"bouton\">\n" +
+                "              <a href=\"\" title=\"Accueil du site\">\n" +
+                "                <img src=\"TALN_RECITAL_fichiers/logo.gif\" alt=\"Accueil du site\" border=\"0\">\n" +
+                "              </a>\n" +
+                "            </td>\n" +
+                "            <td class=\"bouton\">\n" +
+                "              <a href=\"\" title=\"Accueil du site\">\n" +
+                "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub1.gif\" alt=\"Accueil du site\">\n" +
+                "              </a>\n" +
+                "            </td>\n" +
+                "            <td class=\"bouton\">\n" +
+                "              <a href=\"\" title=\"Adh�sion\">\n" +
+                "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub3.gif\" alt=\"Adh�sion\">\n" +
+                "              </a>\n" +
+                "            </td>\n" +
+                "            <td class=\"bouton\">\n" +
+                "              <a href=\"\" title=\"Contact\">\n" +
+                "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub5.gif\" alt=\"Contact\">\n" +
+                "              </a>\n" +
+                "            </td>\n" +
+                "            <td class=\"bouton\">\n" +
+                "              <a href=\"\" title=\"Plan du site\">\n" +
+                "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub6.gif\" alt=\"Plan du site\">\n" +
+                "              </a>\n" +
+                "            </td>\n" +
+                "        </tr>\n" +
+                "      </tbody>\n" +
+                "    </table>\n" +
+                "\n" +
+                "    <img src=\"TALN_RECITAL_fichiers/motif.gif\" height=\"20\" width=\"100%\">\n" +
+                "</div>\n" +
+                "\n" +
+                "<div id=\"principal\" class=\"contenu\">\n" +
+                "    <div class=\"cartouche\">\n" +
+                "        <h1>Conférence TALN/RECITAL</h1>\n" +
+                "    </div>\n" +
+                "\n" +
+                "    <h2>\n" +
+                "        Les éditions de la conférence\n" +
+                "    </h2>");
 
         Collections.sort(conferences, Collections.reverseOrder());
 
-       for (Conference conference : conferences) {
-           final String conferencePageUrl = generateConferencePage(conference);
+        for (Conference conference : conferences) {
+            final String conferencePageUrl = generateConferencePage(conference);
 
             html.append("<a href=\"" + conferencePageUrl + "\">" + conference.getEdition().getAcronyme() +
                     " : " + conference.getEdition().getTitre() + "</a><br>\n" +
@@ -228,9 +222,9 @@ public class XmlUtils {
                 "    <br/>\n" +
                 "\n" +
                 "    <div class=\"soustitre\">" +
-                        conference.getEdition().getDateDebut().getDay() +
-                        " au " +
-                        simpleDateFormat.format(conference.getEdition().getDateFin()) +
+                conference.getEdition().getDateDebut().getDay() +
+                " au " +
+                simpleDateFormat.format(conference.getEdition().getDateFin()) +
                 "    </div>\n" +
                 "\n" +
                 "    <div class=\"texte\">\n" +
@@ -249,64 +243,13 @@ public class XmlUtils {
                 "            <strong>Prix TALN</strong>\n" +
                 "\n" +
                 "            <br><br>\n" +
-                "\n" + getBestArticle(conference) +
+                "\n" +
+                getBestArticle(conference) +
                 "        </p>\n" +
                 "\n" +
                 "        <h3>Actes</h3>\n" +
                 "\n" +
-                "        <p>\n" +
-                "            <strong>Invités</strong>\n" +
-                "\n" +
-                "            <br><br>\n" +
-                "\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Igor Mel’čuk, OLST, Université de Montréal, <b>La\n" +
-                "            phraséologie en langue, en dictionnaire et en TALN </b><br>\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Pierre Isabelle, National Research Council Canada, <b>La\n" +
-                "            montée en puissance des recherches en traduction automatique statistique</b><br>\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Gerald Penn, University of Toronto, 10 King’s College Rd.,\n" +
-                "            Toronto, M5S 3G4, ON, Canada, <b>The Quantitative Study of Writing Systems</b>\n" +
-                "        </p>\n" +
-                "\n" +
-                "        <p>\n" +
-                "            <strong>Papiers longs</strong>\n" +
-                "\n" +
-                "            <br><br>\n" +
-                "\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Holger Schwenk, <b>Adaptation d’un Système de Traduction\n" +
-                "            Automatique Statistique avec des Ressources monolingues </b><br>\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Julien Bourdaillet, Stéphane Huet et Philippe Langlais,\n" +
-                "            <b>Alignement de traductions rares à l’aide de paires de phrases non alignées</b><br>\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Pascal Denis et Benoît Sagot, <b>Exploitation d’une\n" +
-                "            ressource lexicale pour la construction d’un étiqueteur morpho-syntaxique état-de-l’art du français</b><br>\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Olivier Ferret, <b>Similarité sémantique et extraction de\n" +
-                "            synonymes à partir de corpus</b>\n" +
-                "        </p>\n" +
-                "\n" +
-                "        <p>\n" +
-                "            <strong>Papiers courts</strong>\n" +
-                "\n" +
-                "            <br><br>\n" +
-                "\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Louise Deléger et Bruno Cartoni, <b>Adjectifs relationnels\n" +
-                "            et langue de spécialité : vérification d’une hypothèse linguistique en corpus comparable médical</b><br>\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Mathieu Lafourcade et Alain Joubert, <b>Détermination et\n" +
-                "            pondération des raffinements d’un terme à partir de son arbre des usages nommés</b><br>\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Jonathan Chevelu, Yves Lepage, Thierry Moudenc et Ghislain\n" +
-                "            Putois, <b>L’évaluation des paraphrases : pour une prise en compte de la tâche</b>\n" +
-                "        </p>\n" +
-                "\n" +
-                "        <p>\n" +
-                "            <strong>Démonstrations</strong>\n" +
-                "\n" +
-                "            <br><br>\n" +
-                "\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Éric Brunelle et Simon Charest, <b>Présentation du\n" +
-                "            logiciel Antidote HD</b><br>\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Caroline Barrière, <b>TerminoWeb : recherche et analyse\n" +
-                "            d’information thématique</b><br>\n" +
-                "            <img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Wajdi Zaghouani, <b>L'intégration d'un outil de repérage\n" +
-                "            d'entités nommées pour la langue arabe dans un système de veille</b>\n" +
-                "        </p>\n" +
+                getArticles(conference) +
                 "    </div>\n" +
                 "</body>\n" +
                 "</html>\n");
@@ -320,9 +263,9 @@ public class XmlUtils {
         String formatedStr = "";
 
         for (int i = 0; i < presidents.size(); i++) {
-            if(i == 0) {
+            if (i == 0) {
                 formatedStr += presidents.get(i);
-            } else if(i != (presidents.size() - 1)) {
+            } else if (i != (presidents.size() - 1)) {
                 formatedStr += ", " + presidents.get(i);
             } else {
                 formatedStr += " et " + presidents.get(i);
@@ -348,10 +291,59 @@ public class XmlUtils {
         for (String articleId : conference.getEdition().getMeilleurArticle()) {
             final Article article = conference.getArticleById(articleId);
 
-            if(article != null) {
-                formatedStr += "<img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\"> " + getAuteursFormat(article.getAuteurs()) + " (ITI-CNR, Gatineau, Canada) : <i>" + article.getTitre() + "</i><br>";
+            if (article != null) {
+                formatedStr += "<img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\"> " + getAuteursFormat(article) + " : <i>" + article.getTitre() + "</i><br>";
                 //TODO: getAffiliations + multiple affilliation pour un auteur (parser)
             }
+        }
+
+
+        return formatedStr;
+    }
+
+    public static String getAuteursFormat(final Article article) {
+        final List<Auteur> auteurs  = article.getAuteurs();
+
+        String formatedStr = "";
+
+        // Noms
+        for (int i = 0; i < auteurs.size(); i++) {
+            if (i == 0) {
+                formatedStr += auteurs.get(i).getNom();
+            } else if (i != (auteurs.size() - 1)) {
+                formatedStr += ", " + auteurs.get(i).getNom();
+            } else {
+                formatedStr += " et " + auteurs.get(i).getNom();
+            }
+
+
+        }
+
+        //Affiliations
+        Set<String> tmpAffiliationsId = new HashSet<>();
+
+        for (Auteur auteur : auteurs) {
+            for (int id : auteur.getAffiliationsId()) {
+                tmpAffiliationsId.add(String.valueOf(id));
+            }
+        }
+
+        if(tmpAffiliationsId.size() != 0) {
+            List<String> affiliationsId = new ArrayList(tmpAffiliationsId);
+
+            formatedStr += " (";
+            for (int i = 0; i < affiliationsId.size(); i++) {
+                final Affiliation affiliation = article.getAffiliationById(Integer.parseInt(affiliationsId.get(i)));
+
+                if(affiliation != null) {
+                    if(i == 0) {
+                        formatedStr += affiliation.getName();
+                    } else {
+                        formatedStr += " - " +  affiliation.getName();
+                    }
+                }
+            }
+            formatedStr += ")";
         }
 
 
@@ -359,17 +351,27 @@ public class XmlUtils {
         return formatedStr;
     }
 
-    public static String getAuteursFormat(final List<Auteur> auteurs) {
+    public static String getArticleFormat(final List<Article> articles) {
+        //TODO : Trier par order alphabétique du premier auteur
+
         String formatedStr = "";
 
-        for (int i = 0; i < auteurs.size(); i++) {
-            if(i == 0) {
-                formatedStr += auteurs.get(i).getNom();
-            } else if(i != (auteurs.size() - 1)) {
-                formatedStr += ", " + auteurs.get(i).getNom();
-            } else {
-                formatedStr += " et " + auteurs.get(i).getNom();
-            }
+        for (Article article : articles) {
+            formatedStr += "<img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">" + getAuteursFormat(article) + ", <b>" + article.getTitre() + "</b><br>";
+        }
+
+        return formatedStr;
+    }
+
+    public static String getArticles(final Conference conference) {
+        String formatedStr = "";
+
+        for (Type type : conference.getEdition().getTypeArticles()) {
+            formatedStr += "<p>" +
+                    "<strong>" + type.getName() + "</strong>\n" +
+                    "<br><br>\n" +
+                    getArticleFormat(conference.getArticleByType(type.getId())) +
+                    "</p>";
         }
 
         return formatedStr;
