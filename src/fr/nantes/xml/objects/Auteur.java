@@ -1,8 +1,6 @@
 package fr.nantes.xml.objects;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
@@ -35,7 +33,8 @@ public class Auteur {
         return affiliationsId;
     }
 
-    @XmlElement(name = "affiliationId")
+    @XmlList
+    @XmlElement(name="affiliationId")
     public void setAffiliationsId(List<Integer> affiliationId) {
         this.affiliationsId = affiliationId;
     }
