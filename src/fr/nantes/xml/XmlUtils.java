@@ -25,7 +25,6 @@ public class XmlUtils {
     public static final String HOME_PAGE_TEMPLATE_NAME = "HOME_PAGE_TEMPLATE.html";
     public static final String CONFERENCE_PAGE_TEMPLATE_NAME = "CONFERENCE_PAGE_TEMPLATE.html";
 
-
     public static void saveInFile(final String html, final String filePath, final String fileName) {
         //Récupération du chemin courant
         final File repCourant = new java.io.File(new java.io.File("").getAbsolutePath());
@@ -148,8 +147,8 @@ public class XmlUtils {
         String formatedStr = "";
 
         for (Acceptations a : stats) {
-            formatedStr += "<img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">" + a.getSoumissions() + " soumissions d'articles " + a.getId() + "<br>";
-            formatedStr += "<img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">" + a.getName() + " articles " + a.getId() + " acceptés<br>";
+            formatedStr += "<img src=\"../" + HTML_RESSOURSES_PATH + "/puce.gif\" alt=\"-\">" + a.getSoumissions() + " soumissions d'articles " + a.getId() + "<br>";
+            formatedStr += "<img src=\"../" + HTML_RESSOURSES_PATH + "/puce.gif\" alt=\"-\">" + a.getName() + " articles " + a.getId() + " acceptés<br>";
         }
         return formatedStr;
     }
@@ -161,7 +160,7 @@ public class XmlUtils {
             final Article article = conference.getArticleById(articleId);
 
             if (article != null) {
-                formatedStr += "<img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\"> " + getAuteursFormat(article) + " : <i>" + article.getTitre() + "</i><br>";
+                formatedStr += "<img src=\"../" + HTML_RESSOURSES_PATH + "/puce.gif\" alt=\"-\"> " + getAuteursFormat(article) + " : <i>" + article.getTitre() + "</i><br>";
             }
         }
 
@@ -224,7 +223,7 @@ public class XmlUtils {
         String formatedStr = "";
 
         for (Article article : articles) {
-            formatedStr += "<img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">" + getAuteursFormat(article) + ", <b>" + article.getTitre() + "</b><br>";
+            formatedStr += "<img src=\"../" + HTML_RESSOURSES_PATH + "/puce.gif\" alt=\"-\">" + getAuteursFormat(article) + ", <b>" + article.getTitre() + "</b><br>";
         }
 
         return formatedStr;
