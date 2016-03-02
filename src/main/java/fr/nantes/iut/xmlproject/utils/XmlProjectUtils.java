@@ -1,6 +1,6 @@
-package main.java.fr.nantes.iut.xmlproject.utils;
+package fr.nantes.iut.xmlproject.utils;
 
-import main.java.fr.nantes.iut.xmlproject.objects.*;
+import fr.nantes.iut.xmlproject.objects.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

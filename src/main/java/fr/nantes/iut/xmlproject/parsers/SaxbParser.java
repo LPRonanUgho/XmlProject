@@ -1,6 +1,6 @@
-package main.java.fr.nantes.iut.xmlproject.parsers;
+package fr.nantes.iut.xmlproject.parsers;
 
-import main.java.fr.nantes.iut.xmlproject.objects.*;
+import fr.nantes.iut.xmlproject.objects.*;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;

@@ -1,8 +1,8 @@
-package main.java.fr.nantes.iut.xmlproject;
+package fr.nantes.iut.xmlproject;
 
-import main.java.fr.nantes.iut.xmlproject.objects.Conference;
-import main.java.fr.nantes.iut.xmlproject.parsers.SaxbParser;
-import main.java.fr.nantes.iut.xmlproject.utils.XmlProjectUtils;
+import fr.nantes.iut.xmlproject.objects.Conference;
+import fr.nantes.iut.xmlproject.parsers.SaxbParser;
+import fr.nantes.iut.xmlproject.utils.XmlProjectUtils;
 
 import java.util.List;
 

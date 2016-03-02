@@ -1,6 +1,6 @@
-package main.java.fr.nantes.iut.xmlproject.objects;
+package fr.nantes.iut.xmlproject.objects;
 
-import main.java.fr.nantes.iut.xmlproject.parsers.JaxbDateAdapter;
+import fr.nantes.iut.xmlproject.parsers.JaxbDateAdapter;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;

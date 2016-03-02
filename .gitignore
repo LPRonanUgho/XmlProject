@@ -95,3 +95,7 @@ fabric.properties
 
 
 html/
+
+# for maven
+target/
+classes/

@@ -1,4 +1,4 @@
-package main.java.fr.nantes.iut.xmlproject.objects;
+package fr.nantes.iut.xmlproject.objects;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
