@@ -176,8 +176,6 @@ public class XmlUtils {
             } else {
                 formatedStr += " et " + auteurs.get(i).getNom();
             }
-
-
         }
 
         //Affiliations
@@ -190,7 +188,7 @@ public class XmlUtils {
         }
 
         if (tmpAffiliationsId.size() != 0) {
-            List<String> affiliationsId = new ArrayList(tmpAffiliationsId);
+            List<String> affiliationsId = new ArrayList<>(tmpAffiliationsId);
 
             formatedStr += " (";
             for (int i = 0; i < affiliationsId.size(); i++) {
