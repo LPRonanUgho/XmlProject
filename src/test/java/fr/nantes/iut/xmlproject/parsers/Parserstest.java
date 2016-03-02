@@ -14,13 +14,16 @@ import java.util.List;
 /**
  * Created by ughostephan on 02/03/2016.
  */
-public class SaxbParserTest {
+public class ParsersTest {
+
     private SaxbParser saxbParser;
+    private JaxbParser jaxbParser;
 
     @Before
     public void setUp() throws Exception {
         // BEFORE JUNIT
         saxbParser = new SaxbParser(XmlProjectUtils.XML_FILE_NAME);
+        jaxbParser = new JaxbParser(XmlProjectUtils.XML_FILE_NAME);
     }
 
     @After
@@ -29,9 +32,16 @@ public class SaxbParserTest {
     }
 
     @Test
-    public void parseXML() {
-        final List<Conference> conferences = saxbParser.parseXML();
+    public void SaxbParseXML() {
+        parseXML(saxbParser.parseXML());
+    }
 
+    @Test
+    public void JaxbParseXML() {
+        parseXML(jaxbParser.parseXML());
+    }
+
+    private void parseXML(final List<Conference> conferences) {
         // Vérifier que la liste n'est pas vide
         Assert.assertFalse(conferences.isEmpty());
 
