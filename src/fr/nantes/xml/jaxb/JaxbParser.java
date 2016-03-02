@@ -34,7 +34,6 @@ public class JaxbParser implements XMLParserInterface {
             JAXBContext jc = JAXBContext.newInstance(Conferences.class);
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             Conferences conferences = (Conferences) unmarshaller.unmarshal(new File(xmlFileName));
-            //System.out.println(conferences);
             XmlUtils.generateHomePage(conferences.getConferences());
         } catch (Exception e) {
             e.printStackTrace();
