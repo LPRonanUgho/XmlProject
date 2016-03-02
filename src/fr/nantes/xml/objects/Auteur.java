@@ -1,4 +1,4 @@
-package fr.nantes.xml.saxb.objects;
+package fr.nantes.xml.objects;
 
 import java.util.List;
 

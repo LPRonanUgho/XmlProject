@@ -1,4 +1,4 @@
-package fr.nantes.xml.saxb.objects;
+package fr.nantes.xml.objects;
 
 /**
  * Created by ronan on 01/03/16.

@@ -1,10 +1,11 @@
-package fr.nantes.xml.saxb.objects;
+package fr.nantes.xml.objects;
 
 /**
  * Created by ronan on 01/03/16.
  */
-public class Type {
+public class Acceptations {
     private String id;
+    private int soumissions;
     private String name;
 
     public String getId() {
@@ -13,6 +14,14 @@ public class Type {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getSoumissions() {
+        return soumissions;
+    }
+
+    public void setSoumissions(int soumissions) {
+        this.soumissions = soumissions;
     }
 
     public String getName() {
@@ -25,8 +34,9 @@ public class Type {
 
     @Override
     public String toString() {
-        return "Type{" +
+        return "Acceptations{" +
                 "id='" + id + '\'' +
+                ", soumissions=" + soumissions +
                 ", name='" + name + '\'' +
                 '}';
     }

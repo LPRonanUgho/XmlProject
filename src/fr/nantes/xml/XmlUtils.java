@@ -1,5 +1,6 @@
 package fr.nantes.xml;
 
+import fr.nantes.xml.objects.*;
 import fr.nantes.xml.saxb.objects.*;
 
 import java.io.File;
@@ -92,8 +93,8 @@ public class XmlUtils {
                 "              </a>\n" +
                 "            </td>\n" +
                 "            <td class=\"bouton\">\n" +
-                "              <a href=\"\" title=\"Adh�sion\">\n" +
-                "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub3.gif\" alt=\"Adh�sion\">\n" +
+                "              <a href=\"\" title=\"Adhésion\">\n" +
+                "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub3.gif\" alt=\"Adhésion\">\n" +
                 "              </a>\n" +
                 "            </td>\n" +
                 "            <td class=\"bouton\">\n" +
@@ -183,12 +184,12 @@ public class XmlUtils {
                 "        <tbody>\n" +
                 "        <tr>\n" +
                 "            <td class=\"bouton\">\n" +
-                "                <a href=\"\" title=\"Accueil du site\">\n" +
+                "                <a href=\"../TALN_RECITAL.html\" title=\"Accueil du site\">\n" +
                 "                    <img src=\"../TALN_RECITAL_fichiers/logo.gif\" alt=\"Accueil du site\" border=\"0\">\n" +
                 "                </a>\n" +
                 "            </td>\n" +
                 "            <td class=\"bouton\">\n" +
-                "                <a href=\"\" title=\"Accueil du site\">\n" +
+                "                <a href=\"../TALN_RECITAL.html\" title=\"Accueil du site\">\n" +
                 "                    <img class=\"bouton_rouge\" src=\"../TALN_RECITAL_fichiers/rub1.gif\" alt=\"Accueil du site\">\n" +
                 "                </a>\n" +
                 "            </td>\n" +

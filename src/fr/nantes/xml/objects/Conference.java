@@ -1,7 +1,4 @@
-package fr.nantes.xml.saxb.objects;
-
-import com.sun.org.apache.xerces.internal.xs.LSInputList;
-import org.w3c.dom.ls.LSInput;
+package fr.nantes.xml.objects;
 
 import java.util.*;
 
