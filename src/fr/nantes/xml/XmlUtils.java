@@ -296,7 +296,6 @@ public class XmlUtils {
 
             if (article != null) {
                 formatedStr += "<img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\"> " + getAuteursFormat(article) + " : <i>" + article.getTitre() + "</i><br>";
-                //TODO: getAffiliations + multiple affilliation pour un auteur (parser)
             }
         }
 
@@ -355,7 +354,7 @@ public class XmlUtils {
     }
 
     public static String getArticleFormat(final List<Article> articles) {
-        //TODO : Trier par order alphabétique du premier auteur
+        Collections.sort(articles);
 
         String formatedStr = "";
 

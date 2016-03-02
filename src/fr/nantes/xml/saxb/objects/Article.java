@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by ronan on 01/03/16.
  */
-public class Article {
+public class Article implements Comparable<Article>  {
     private String id;
     private String session;
     private List<Auteur> auteurs;
@@ -137,5 +137,14 @@ public class Article {
                 ", abstract_libelle='" + abstract_libelle + '\'' +
                 ", keywords='" + keywords + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Article article) {
+        if(auteurs.size() != 0 && article.getAuteurs().size() != 0) {
+            return auteurs.get(0).getNom().compareTo(article.getAuteurs().get(0).getNom());
+        } else {
+            return 0;
+        }
     }
 }
