@@ -1,6 +1,7 @@
 package fr.nantes.xml.objects;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ronan on 01/03/16.
@@ -32,7 +33,7 @@ public class Conference implements Comparable<Conference> {
 
     public Article getArticleById(final String id) {
         for (final Article article : articles) {
-            if(id.equalsIgnoreCase(article.getId())) {
+            if (id.equalsIgnoreCase(article.getId())) {
                 return article;
             }
         }
@@ -44,7 +45,7 @@ public class Conference implements Comparable<Conference> {
         ArrayList<Article> articlesFilteredByType = new ArrayList<>();
 
         for (final Article article : this.articles) {
-            if(article.getType().equalsIgnoreCase(typeId)) {
+            if (article.getType().equalsIgnoreCase(typeId)) {
                 articlesFilteredByType.add(article);
             }
         }

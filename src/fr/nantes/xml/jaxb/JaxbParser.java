@@ -14,6 +14,7 @@ public class JaxbParser implements XMLParserInterface {
 
     /**
      * Constructor
+     *
      * @param xmlFileName
      */
     public JaxbParser(String xmlFileName) {

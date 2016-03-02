@@ -50,6 +50,7 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
 
     /**
      * Constructor
+     *
      * @param xmlFileName
      */
     public SaxbParser(String xmlFileName) {
@@ -121,26 +122,46 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
         }
 
         // START EDITION
-        if(elementName.equalsIgnoreCase("edition")) { nodeEdition = true; }
+        if (elementName.equalsIgnoreCase("edition")) {
+            nodeEdition = true;
+        }
         // START LIST PRESIDENTS
-        if(elementName.equalsIgnoreCase("presidents")) { nodePresident = true; }
+        if (elementName.equalsIgnoreCase("presidents")) {
+            nodePresident = true;
+        }
         // START LIST TYPE ARTICLES
-        if(elementName.equalsIgnoreCase("typeArticles")) { nodeTypeArticles = true; }
+        if (elementName.equalsIgnoreCase("typeArticles")) {
+            nodeTypeArticles = true;
+        }
         // START LIST STATS
-        if(elementName.equalsIgnoreCase("statistiques")) { nodeStatistiques = true; }
+        if (elementName.equalsIgnoreCase("statistiques")) {
+            nodeStatistiques = true;
+        }
         // START LIST MEILLEUR ARTICLE
-        if(elementName.equalsIgnoreCase("meilleurArticle")) { nodeMeilleurArticle = true; }
+        if (elementName.equalsIgnoreCase("meilleurArticle")) {
+            nodeMeilleurArticle = true;
+        }
 
         // START LIST ARTICLES
-        if(elementName.equalsIgnoreCase("articles")) { nodeArticles = true; }
+        if (elementName.equalsIgnoreCase("articles")) {
+            nodeArticles = true;
+        }
         // START ARTICLE
-        if(elementName.equalsIgnoreCase("article")) { nodeArticle = true; }
+        if (elementName.equalsIgnoreCase("article")) {
+            nodeArticle = true;
+        }
         // START LIST AUTEURS
-        if(elementName.equalsIgnoreCase("auteurs")) { nodeAuteurs = true; }
+        if (elementName.equalsIgnoreCase("auteurs")) {
+            nodeAuteurs = true;
+        }
         // START AUTEUR
-        if(elementName.equalsIgnoreCase("auteur")) { nodeAuteur = true; }
+        if (elementName.equalsIgnoreCase("auteur")) {
+            nodeAuteur = true;
+        }
         // START LIST AFFILIATIONS
-        if(elementName.equalsIgnoreCase("affiliations")) { nodeAffilitions = true; }
+        if (elementName.equalsIgnoreCase("affiliations")) {
+            nodeAffilitions = true;
+        }
     }
 
     @Override
@@ -151,30 +172,50 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
         }
 
         // END EDITION
-        if(elementName.equalsIgnoreCase("edition")) { nodeEdition = false; }
+        if (elementName.equalsIgnoreCase("edition")) {
+            nodeEdition = false;
+        }
         // END LIST PRESIDENT
-        if(elementName.equalsIgnoreCase("presidents")) { nodePresident = false; }
+        if (elementName.equalsIgnoreCase("presidents")) {
+            nodePresident = false;
+        }
         // END LIST TYPE ARTICLES
-        if(elementName.equalsIgnoreCase("typeArticles")) { nodeTypeArticles = false; }
+        if (elementName.equalsIgnoreCase("typeArticles")) {
+            nodeTypeArticles = false;
+        }
         // END LIST STATS
-        if(elementName.equalsIgnoreCase("statistiques")) { nodeStatistiques = false; }
+        if (elementName.equalsIgnoreCase("statistiques")) {
+            nodeStatistiques = false;
+        }
         // END LIST MEILLEUR ARTICLE
-        if(elementName.equalsIgnoreCase("meilleurArticle")) { nodeMeilleurArticle = false; }
+        if (elementName.equalsIgnoreCase("meilleurArticle")) {
+            nodeMeilleurArticle = false;
+        }
 
         // END LIST ARTICLES
-        if(elementName.equalsIgnoreCase("articles")) { nodeArticles = false; }
+        if (elementName.equalsIgnoreCase("articles")) {
+            nodeArticles = false;
+        }
         // END ARTICLE
-        if(elementName.equalsIgnoreCase("article")) { nodeArticle = false; }
+        if (elementName.equalsIgnoreCase("article")) {
+            nodeArticle = false;
+        }
         // END LIST AUTEURS
-        if(elementName.equalsIgnoreCase("auteurs")) { nodeAuteurs = false; }
+        if (elementName.equalsIgnoreCase("auteurs")) {
+            nodeAuteurs = false;
+        }
         // END AUTEUR
-        if(elementName.equalsIgnoreCase("auteur")) { nodeAuteur = false; }
+        if (elementName.equalsIgnoreCase("auteur")) {
+            nodeAuteur = false;
+        }
         // END LIST AFFILIATIONS
-        if(elementName.equalsIgnoreCase("affiliations")) { nodeAffilitions = false; }
+        if (elementName.equalsIgnoreCase("affiliations")) {
+            nodeAffilitions = false;
+        }
 
 
         // START EDITION
-        if(nodeEdition) {
+        if (nodeEdition) {
             if (elementName.equalsIgnoreCase("acronyme")) {
                 tmpConference.getEdition().setAcronyme(tmpValue);
             }
@@ -232,19 +273,19 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
         // END EDITION
 
         // START ARTICLES
-        if(nodeArticles) {
-            if(elementName.equalsIgnoreCase("article")) {
+        if (nodeArticles) {
+            if (elementName.equalsIgnoreCase("article")) {
                 tmpConference.getArticles().add(tmpArticle);
             }
 
-            if(nodeArticle) {
-                if(nodeAuteurs) {
-                    if(elementName.equalsIgnoreCase("auteur")) {
+            if (nodeArticle) {
+                if (nodeAuteurs) {
+                    if (elementName.equalsIgnoreCase("auteur")) {
                         tmpAuteur.setAffiliationsId(tmpListAffiliationsId);
                         tmpListAuteurs.add(tmpAuteur);
                     }
 
-                    if(nodeAuteur) {
+                    if (nodeAuteur) {
                         if (elementName.equalsIgnoreCase("nom")) {
                             tmpAuteur.setNom(tmpValue);
                         }
@@ -262,34 +303,34 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
                     }
                 }
 
-                if(elementName.equalsIgnoreCase("auteurs")) {
+                if (elementName.equalsIgnoreCase("auteurs")) {
                     tmpArticle.setAuteurs(tmpListAuteurs);
                 }
 
-                if(elementName.equalsIgnoreCase("affiliation") && nodeAffilitions) {
+                if (elementName.equalsIgnoreCase("affiliation") && nodeAffilitions) {
                     tmpAffiliation.setName(tmpValue);
                     tmpArticle.getAffiliations().add(tmpAffiliation);
                 }
 
-                if(elementName.equalsIgnoreCase("titre")) {
+                if (elementName.equalsIgnoreCase("titre")) {
                     tmpArticle.setTitre(tmpValue);
                 }
-                if(elementName.equalsIgnoreCase("type")) {
+                if (elementName.equalsIgnoreCase("type")) {
                     tmpArticle.setType(tmpValue);
                 }
-                if(elementName.equalsIgnoreCase("pages")) {
+                if (elementName.equalsIgnoreCase("pages")) {
                     tmpArticle.setPages(tmpValue);
                 }
-                if(elementName.equalsIgnoreCase("resume")) {
+                if (elementName.equalsIgnoreCase("resume")) {
                     tmpArticle.setResume(tmpValue);
                 }
-                if(elementName.equalsIgnoreCase("mots_cles")) {
+                if (elementName.equalsIgnoreCase("mots_cles")) {
                     tmpArticle.setMots_cles(tmpValue);
                 }
-                if(elementName.equalsIgnoreCase("abstract")) {
+                if (elementName.equalsIgnoreCase("abstract")) {
                     tmpArticle.setAbstract_libelle(tmpValue);
                 }
-                if(elementName.equalsIgnoreCase("keywords")) {
+                if (elementName.equalsIgnoreCase("keywords")) {
                     tmpArticle.setKeywords(tmpValue);
                 }
             }
