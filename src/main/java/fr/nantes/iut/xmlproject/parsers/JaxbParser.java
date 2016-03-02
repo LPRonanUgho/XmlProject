@@ -1,13 +1,12 @@
-package fr.nantes.xml.jaxb;
+package main.java.fr.nantes.iut.xmlproject.parsers;
 
-import fr.nantes.xml.XMLParserInterface;
-import fr.nantes.xml.XmlUtils;
-import fr.nantes.xml.objects.Conferences;
+import main.java.fr.nantes.iut.xmlproject.objects.Conference;
+import main.java.fr.nantes.iut.xmlproject.objects.Conferences;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * Created by ughostephan on 01/03/2016.
@@ -29,14 +28,15 @@ public class JaxbParser implements XMLParserInterface {
      * {@inheritDoc}
      */
     @Override
-    public void parseXML() {
+    public List<Conference> parseXML() {
         try {
             JAXBContext jc = JAXBContext.newInstance(Conferences.class);
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             Conferences conferences = (Conferences) unmarshaller.unmarshal(new File(xmlFileName));
-            XmlUtils.generateHomePage(conferences.getConferences());
+            return conferences.getConferences();
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 }

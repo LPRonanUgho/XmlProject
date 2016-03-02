@@ -1,4 +1,4 @@
-package fr.nantes.xml.objects;
+package main.java.fr.nantes.iut.xmlproject.objects;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -7,18 +7,28 @@ import javax.xml.bind.annotation.XmlValue;
 /**
  * Created by ronan on 01/03/16.
  */
-@XmlRootElement( name = "type" )
-public class Type {
+@XmlRootElement( name = "acceptations" )
+public class Acceptations {
     private String id;
+    private int soumissions;
     private String name;
 
     public String getId() {
         return id;
     }
 
-    @XmlAttribute( name = "id")
+    @XmlAttribute(name = "id")
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getSoumissions() {
+        return soumissions;
+    }
+
+    @XmlAttribute(name = "soumissions")
+    public void setSoumissions(int soumissions) {
+        this.soumissions = soumissions;
     }
 
     public String getName() {
@@ -32,8 +42,9 @@ public class Type {
 
     @Override
     public String toString() {
-        return "Type{" +
+        return "Acceptations{" +
                 "id='" + id + '\'' +
+                ", soumissions=" + soumissions +
                 ", name='" + name + '\'' +
                 '}';
     }

@@ -1,8 +1,6 @@
-package fr.nantes.xml.saxb;
+package main.java.fr.nantes.iut.xmlproject.parsers;
 
-import fr.nantes.xml.XMLParserInterface;
-import fr.nantes.xml.XmlUtils;
-import fr.nantes.xml.objects.*;
+import main.java.fr.nantes.iut.xmlproject.objects.*;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -61,9 +59,9 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
      * {@inheritDoc}
      */
     @Override
-    public void parseXML() {
+    public List<Conference> parseXML() {
         parseDocument();
-        XmlUtils.generateHomePage(conferences);
+        return this.conferences;
     }
 
     private void parseDocument() {
@@ -75,7 +73,7 @@ public class SaxbParser extends DefaultHandler implements XMLParserInterface {
         } catch (ParserConfigurationException e) {
             System.err.println("ParserConfig error");
         } catch (SAXException e) {
-            System.err.println("SAXException : xml not well formed");
+            System.err.println("SAXException : xmlproject not well formed");
         } catch (IOException e) {
             System.err.println("IO error");
         }

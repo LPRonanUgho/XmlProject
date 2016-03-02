@@ -1,6 +1,6 @@
-package fr.nantes.xml;
+package main.java.fr.nantes.iut.xmlproject.utils;
 
-import fr.nantes.xml.objects.*;
+import main.java.fr.nantes.iut.xmlproject.objects.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * Created by ronan on 01/03/16.
  */
-public class XmlUtils {
+public class XmlProjectUtils {
     public static final String RESSOURCES_PATH = "ressources/";
     public static final String HTML_PATH = "html/";
     public static final String CONFERENCES_PATH = "conferences/";

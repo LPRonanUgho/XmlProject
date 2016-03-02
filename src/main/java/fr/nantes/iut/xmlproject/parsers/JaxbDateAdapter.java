@@ -1,4 +1,4 @@
-package fr.nantes.xml.jaxb;
+package main.java.fr.nantes.iut.xmlproject.parsers;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.text.DateFormat;

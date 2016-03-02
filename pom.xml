@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>fr.nantes.iut</groupId>
+	<artifactId>xmlproject</artifactId>
+	<version>1.0.0</version>
+
+	<name>xmlproject</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+				<executions>
+					<execution>
+						<id>default-jar</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>build-jaxb</id>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>fr.nantes.iut.xmlproject.LaunchJaxbParser</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<finalName>jaxbParser</finalName>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>assembly</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>build-saxc</id>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>fr.nantes.iut.xmlproject.LaunchSaxbParser</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<finalName>saxbParser</finalName>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>assembly</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>
+
