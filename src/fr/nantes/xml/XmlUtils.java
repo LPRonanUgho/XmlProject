@@ -33,15 +33,18 @@ public class XmlUtils {
             writer.write(html);
             //Fermeture du fichier
             writer.close();
-        } catch (FileNotFoundException e) {
+            //Affichage de trace
+            System.out.println("Fichier \"" + fileName + "\" correctement créé à cet endroit : \"" + DIRECTORY + "\"");
+        } catch(FileNotFoundException e) {
             //Création du répertoire source si inexistant
             File dir = new File(DIRECTORY);
             dir.mkdirs();
+            System.out.println("Dossier \"" + DIRECTORY + "\" créé car inexistant");
             //Appelle à nouveau de la fonction pour créer le fichier
             saveInFile(html, filePath, fileName);
         } catch (UnsupportedEncodingException e) {
             //Affichage de la trace en cas d'erreur d'encodage
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 
