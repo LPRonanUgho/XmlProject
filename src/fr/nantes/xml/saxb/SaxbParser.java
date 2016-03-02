@@ -2,7 +2,7 @@ package fr.nantes.xml.saxb;
 
 import fr.nantes.xml.XMLParserInterface;
 import fr.nantes.xml.XmlUtils;
-import fr.nantes.xml.saxb.objects.*;
+import fr.nantes.xml.objects.*;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;

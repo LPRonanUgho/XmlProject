@@ -1,7 +1,6 @@
 package fr.nantes.xml;
 
 import fr.nantes.xml.objects.*;
-import fr.nantes.xml.saxb.objects.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
