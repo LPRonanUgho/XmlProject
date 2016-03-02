@@ -5,13 +5,11 @@ import fr.nantes.xml.saxb.objects.Article;
 import fr.nantes.xml.saxb.objects.Auteur;
 import fr.nantes.xml.saxb.objects.Conference;
 
-import javax.swing.text.html.HTML;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,15 +37,18 @@ public class XmlUtils {
             writer.write(html);
             //Fermeture du fichier
             writer.close();
+            //Affichage de trace
+            System.out.println("Fichier \"" + fileName + "\" correctement créé à cet endroit : \"" + DIRECTORY + "\"");
         } catch(FileNotFoundException e) {
             //Création du répertoire source si inexistant
             File dir = new File(DIRECTORY);
             dir.mkdirs();
+            System.out.println("Dossier \"" + DIRECTORY + "\" créé car inexistant");
             //Appelle à nouveau de la fonction pour créer le fichier
             saveInFile(html, filePath, fileName);
         } catch(UnsupportedEncodingException e) {
             //Affichage de la trace en cas d'erreur d'encodage
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 
