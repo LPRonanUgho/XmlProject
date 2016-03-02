@@ -16,8 +16,15 @@ public class XmlUtils {
     public static final String RESSOURCES_PATH = "ressources/";
     public static final String HTML_PATH = "html/";
     public static final String CONFERENCES_PATH = "conferences/";
+    public static final String TEMPLATES_PATH = RESSOURCES_PATH + "templates/";
+
     public static final String XML_FILE_NAME = RESSOURCES_PATH + "TALN-RECITAL-BIB.xml";
-    public static final String OUTPUT_FILE_NAME = "TALN_RECITAL.html";
+    public static final String HTML_RESSOURSES_PATH = "TALN_RECITAL_fichiers/";
+
+    public static final String HOME_PAGE_FILE_NAME = "TALN_RECITAL.html";
+    public static final String HOME_PAGE_TEMPLATE_NAME = "HOME_PAGE_TEMPLATE.html";
+    public static final String CONFERENCE_PAGE_TEMPLATE_NAME = "CONFERENCE_PAGE_TEMPLATE.html";
+
 
     public static void saveInFile(final String html, final String filePath, final String fileName) {
         //Récupération du chemin courant
@@ -35,7 +42,7 @@ public class XmlUtils {
             writer.close();
             //Affichage de trace
             System.out.println("Fichier \"" + fileName + "\" correctement créé à cet endroit : \"" + DIRECTORY + "\"");
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             //Création du répertoire source si inexistant
             File dir = new File(DIRECTORY);
             dir.mkdirs();
@@ -49,215 +56,51 @@ public class XmlUtils {
     }
 
     public static void generateHomePage(List<Conference> conferences) {
-        final StringBuilder html = new StringBuilder();
-        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
+        final String htmlTemplateFile = TEMPLATES_PATH + HOME_PAGE_TEMPLATE_NAME;
 
-        html.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" +
-                "<html lang=\"fr\">\n" +
-                "<head>\n" +
-                "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\n" +
-                "    <title>Conférence TALN/RECITAL</title>\n" +
-                "    <link rel=\"stylesheet\" href=\"TALN_RECITAL_fichiers/structure.css\" type=\"text/css\">\n" +
-                "    <link rel=\"stylesheet\" href=\"TALN_RECITAL_fichiers/styles.css\" type=\"text/css\">\n" +
-                "</head>\n" +
-                "<body dir=\"ltr\">\n" +
-                "<style>\n" +
-                "    .bouton A IMG {\n" +
-                "        border: 0px;\n" +
-                "    }\n" +
-                "\n" +
-                "    .bouton A:hover IMG {\n" +
-                "        border: 0px;\n" +
-                "        background-color: #FFFFFF;\n" +
-                "        filter: alpha(opacity=100);\n" +
-                "    }\n" +
-                "\n" +
-                "    .warning {\n" +
-                "        margin-bottom: 10px;\n" +
-                "        background-color: white;\n" +
-                "    }\n" +
-                "</style>\n" +
-                "<div id=\"banniere\">\n" +
-                "    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
-                "        <tbody>\n" +
-                "        <tr>\n" +
-                "            <td class=\"bouton\">\n" +
-                "              <a href=\"\" title=\"Accueil du site\">\n" +
-                "                <img src=\"TALN_RECITAL_fichiers/logo.gif\" alt=\"Accueil du site\" border=\"0\">\n" +
-                "              </a>\n" +
-                "            </td>\n" +
-                "            <td class=\"bouton\">\n" +
-                "              <a href=\"\" title=\"Accueil du site\">\n" +
-                "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub1.gif\" alt=\"Accueil du site\">\n" +
-                "              </a>\n" +
-                "            </td>\n" +
-                "            <td class=\"bouton\">\n" +
-                "              <a href=\"\" title=\"Adhésion\">\n" +
-                "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub3.gif\" alt=\"Adhésion\">\n" +
-                "              </a>\n" +
-                "            </td>\n" +
-                "            <td class=\"bouton\">\n" +
-                "              <a href=\"\" title=\"Contact\">\n" +
-                "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub5.gif\" alt=\"Contact\">\n" +
-                "              </a>\n" +
-                "            </td>\n" +
-                "            <td class=\"bouton\">\n" +
-                "              <a href=\"\" title=\"Plan du site\">\n" +
-                "                <img class=\"bouton_rouge\" src=\"TALN_RECITAL_fichiers/rub6.gif\" alt=\"Plan du site\">\n" +
-                "              </a>\n" +
-                "            </td>\n" +
-                "        </tr>\n" +
-                "      </tbody>\n" +
-                "    </table>\n" +
-                "\n" +
-                "    <img src=\"TALN_RECITAL_fichiers/motif.gif\" height=\"20\" width=\"100%\">\n" +
-                "</div>\n" +
-                "\n" +
-                "<div id=\"principal\" class=\"contenu\">\n" +
-                "    <div class=\"cartouche\">\n" +
-                "        <h1>Conférence TALN/RECITAL</h1>\n" +
-                "    </div>\n" +
-                "\n" +
-                "    <h2>\n" +
-                "        Les éditions de la conférence\n" +
-                "    </h2>");
-
-        Collections.sort(conferences, Collections.reverseOrder());
-
-        for (Conference conference : conferences) {
-            final String conferencePageUrl = generateConferencePage(conference);
-
-            html.append("<a href=\"" + conferencePageUrl + "\">" + conference.getEdition().getAcronyme() +
-                    " : " + conference.getEdition().getTitre() + "</a><br>\n" +
-                    "Organisation : " + getPresidentsFormat(conference.getEdition().getPresidents()) + "<br>\n" +
-                    "Date et lieu: " +
-                    conference.getEdition().getDateDebut().getDay() +
-                    " au " +
-                    simpleDateFormat.format(conference.getEdition().getDateFin()) +
-                    ", " + conference.getEdition().getVille() +
-                    ", " + conference.getEdition().getPays() + ".<br>\n <br>");
+        String htmlString = "";
+        try {
+            htmlString = new Scanner(new File(htmlTemplateFile)).useDelimiter("\\Z").next();
+        } catch (FileNotFoundException e) {
+            //TODO : Error - file not found
         }
 
-        html.append("</div>\n" +
-                "</body>\n" +
-                "</html>");
+        htmlString = htmlString.replace("$ressourcesPath", HTML_RESSOURSES_PATH);
+        htmlString = htmlString.replace("$conferences", getConferences(conferences));
 
-        saveInFile(html.toString(), HTML_PATH, OUTPUT_FILE_NAME);
+        saveInFile(htmlString, HTML_PATH, HOME_PAGE_FILE_NAME);
     }
 
     public static String generateConferencePage(Conference conference) {
         final String fileName = conference.getEdition().getAcronyme().replace("'", "_").toUpperCase() + ".html";
 
-        final StringBuilder html = new StringBuilder();
         final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
 
-        html.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" +
-                "<html lang=\"fr\">\n" +
-                "<head>\n" +
-                "    <title>" + conference.getEdition().getAcronyme() + " : " + conference.getEdition().getTitre() + "</title>\n" +
-                "\n" +
-                "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n" +
-                "\n" +
-                "    <link rel=\"stylesheet\" href=\"../TALN_RECITAL_fichiers/structure.css\" type=\"text/css\">\n" +
-                "    <link rel=\"stylesheet\" href=\"../TALN_RECITAL_fichiers/styles.css\" type=\"text/css\">\n" +
-                "</head>\n" +
-                "<body dir=\"ltr\">\n" +
-                "<style>\n" +
-                "    .bouton A IMG {\n" +
-                "        border: 0px;\n" +
-                "    }\n" +
-                "\n" +
-                "    .bouton A:hover IMG {\n" +
-                "        border: 0px;\n" +
-                "        background-color: #FFFFFF;\n" +
-                "        filter: alpha(opacity=100);\n" +
-                "    }\n" +
-                "\n" +
-                "    .warning {\n" +
-                "        margin-bottom: 10px;\n" +
-                "        background-color: white;\n" +
-                "    }\n" +
-                "</style>\n" +
-                "<div id=\"banniere\">\n" +
-                "    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
-                "        <tbody>\n" +
-                "        <tr>\n" +
-                "            <td class=\"bouton\">\n" +
-                "                <a href=\"../TALN_RECITAL.html\" title=\"Accueil du site\">\n" +
-                "                    <img src=\"../TALN_RECITAL_fichiers/logo.gif\" alt=\"Accueil du site\" border=\"0\">\n" +
-                "                </a>\n" +
-                "            </td>\n" +
-                "            <td class=\"bouton\">\n" +
-                "                <a href=\"../TALN_RECITAL.html\" title=\"Accueil du site\">\n" +
-                "                    <img class=\"bouton_rouge\" src=\"../TALN_RECITAL_fichiers/rub1.gif\" alt=\"Accueil du site\">\n" +
-                "                </a>\n" +
-                "            </td>\n" +
-                "            <td class=\"bouton\">\n" +
-                "                <a href=\"\" title=\"Adhésion\">\n" +
-                "                    <img class=\"bouton_rouge\" src=\"../TALN_RECITAL_fichiers/rub3.gif\" alt=\"Adhésion\">\n" +
-                "                </a>\n" +
-                "            </td>\n" +
-                "            <td class=\"bouton\">\n" +
-                "                <a href=\"\" title=\"Contact\">\n" +
-                "                    <img class=\"bouton_rouge\" src=\"../TALN_RECITAL_fichiers/rub5.gif\" alt=\"Contact\">\n" +
-                "                </a>\n" +
-                "            </td>\n" +
-                "            <td class=\"bouton\">\n" +
-                "                <a href=\"\" title=\"Plan du site\">\n" +
-                "                    <img class=\"bouton_rouge\" src=\"../TALN_RECITAL_fichiers/rub6.gif\" alt=\"Plan du site\">\n" +
-                "                </a>\n" +
-                "            </td>\n" +
-                "        </tr>\n" +
-                "        </tbody>\n" +
-                "    </table>\n" +
-                "\n" +
-                "    <img src=\"../TALN_RECITAL_fichiers/motif.gif\" height=\"20\" width=\"100%\">\n" +
-                "</div>\n" +
-                "\n" +
-                "<div class=\"contenu\" id=\"principal\">\n" +
-                "    <div class=\"surtitre\">" + getPresidentsFormat(conference.getEdition().getPresidents()) + ", " + conference.getEdition().getVille() + " (" + conference.getEdition().getPays() + ")</div>\n" +
-                "\n" +
-                "    <h1>" + conference.getEdition().getAcronyme() + " : " + conference.getEdition().getTitre() + "</h1>\n" +
-                "\n" +
-                "    <a href=\"" + conference.getEdition().getSiteWeb() + "\"><img src=\"../TALN_RECITAL_fichiers/puce.gif\" alt=\"-\">Site web</a>\n" +
-                "\n" +
-                "    <br/>\n" +
-                "    <br/>\n" +
-                "\n" +
-                "    <div class=\"soustitre\">" +
-                conference.getEdition().getDateDebut().getDay() +
-                " au " +
-                simpleDateFormat.format(conference.getEdition().getDateFin()) +
-                "    </div>\n" +
-                "\n" +
-                "    <div class=\"texte\">\n" +
-                "        <p>\n" +
-                "        <h3>Statistiques de la conférence</h3>\n" +
-                "        <p>\n" + getConferenceStats(conference.getEdition().getStatistiques()) + "</p>\n" +
-                "\n" +
-                "        <h3>Papiers primés</h3>\n" +
-                "\n" +
-                "        <p>\n" +
-                "            Comme tous les ans, le Comité Permanent de la conférence associé à leurs comités de sélection respectifs ont\n" +
-                "            décerné un prix aux articles jugés les meilleurs de la conférence.\n" +
-                "        </p>\n" +
-                "\n" +
-                "        <p>\n" +
-                "            <strong>Prix TALN</strong>\n" +
-                "\n" +
-                "            <br><br>\n" +
-                "\n" +
-                getBestArticle(conference) +
-                "        </p>\n" +
-                "\n" +
-                "        <h3>Actes</h3>\n" +
-                "\n" +
-                getArticles(conference) +
-                "    </div>\n" +
-                "</body>\n" +
-                "</html>\n");
+        final String htmlTemplateFile = TEMPLATES_PATH + CONFERENCE_PAGE_TEMPLATE_NAME;
 
-        saveInFile(html.toString(), HTML_PATH + CONFERENCES_PATH, fileName);
+        String htmlString = "";
+        try {
+            htmlString = new Scanner(new File(htmlTemplateFile)).useDelimiter("\\Z").next();
+        } catch (FileNotFoundException e) {
+            //TODO : Error - file not found
+        }
+
+        htmlString = htmlString.replace("$ressourcesPath", HTML_RESSOURSES_PATH);
+        htmlString = htmlString.replace("$homePage", HOME_PAGE_FILE_NAME);
+
+        htmlString = htmlString.replace("$acronyme", conference.getEdition().getAcronyme());
+        htmlString = htmlString.replace("$titre", conference.getEdition().getTitre());
+        htmlString = htmlString.replace("$presidents", getPresidentsFormat(conference.getEdition().getPresidents()));
+        htmlString = htmlString.replace("$ville", conference.getEdition().getVille());
+        htmlString = htmlString.replace("$pays", conference.getEdition().getPays());
+        htmlString = htmlString.replace("$siteWeb", conference.getEdition().getSiteWeb());
+        htmlString = htmlString.replace("$dateDebut", String.valueOf(conference.getEdition().getDateDebut().getDay()));
+        htmlString = htmlString.replace("$dateFin", simpleDateFormat.format(conference.getEdition().getDateFin()));
+        htmlString = htmlString.replace("$statistiques", getConferenceStats(conference.getEdition().getStatistiques()));
+        htmlString = htmlString.replace("$bestArticles", getBestArticle(conference));
+        htmlString = htmlString.replace("$articles", getArticles(conference));
+
+        saveInFile(htmlString, HTML_PATH + CONFERENCES_PATH, fileName);
 
         return CONFERENCES_PATH + fileName;
     }
@@ -273,6 +116,29 @@ public class XmlUtils {
             } else {
                 formatedStr += " et " + presidents.get(i);
             }
+        }
+
+        return formatedStr;
+    }
+
+    public static String getConferences(final List<Conference> conferences) {
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
+        String formatedStr = "";
+
+        Collections.sort(conferences, Collections.reverseOrder());
+
+        for (Conference conference : conferences) {
+            final String conferencePageUrl = generateConferencePage(conference);
+
+            formatedStr += "<a href=\"" + conferencePageUrl + "\">" + conference.getEdition().getAcronyme() +
+                    " : " + conference.getEdition().getTitre() + "</a><br>\n" +
+                    "Organisation : " + getPresidentsFormat(conference.getEdition().getPresidents()) + "<br>\n" +
+                    "Date et lieu: " +
+                    conference.getEdition().getDateDebut().getDay() +
+                    " au " +
+                    simpleDateFormat.format(conference.getEdition().getDateFin()) +
+                    ", " + conference.getEdition().getVille() +
+                    ", " + conference.getEdition().getPays() + ".<br>\n <br>";
         }
 
         return formatedStr;
@@ -304,7 +170,7 @@ public class XmlUtils {
     }
 
     public static String getAuteursFormat(final Article article) {
-        final List<Auteur> auteurs  = article.getAuteurs();
+        final List<Auteur> auteurs = article.getAuteurs();
 
         String formatedStr = "";
 
@@ -330,24 +196,23 @@ public class XmlUtils {
             }
         }
 
-        if(tmpAffiliationsId.size() != 0) {
+        if (tmpAffiliationsId.size() != 0) {
             List<String> affiliationsId = new ArrayList(tmpAffiliationsId);
 
             formatedStr += " (";
             for (int i = 0; i < affiliationsId.size(); i++) {
                 final Affiliation affiliation = article.getAffiliationById(Integer.parseInt(affiliationsId.get(i)));
 
-                if(affiliation != null) {
-                    if(i == 0) {
+                if (affiliation != null) {
+                    if (i == 0) {
                         formatedStr += affiliation.getName();
                     } else {
-                        formatedStr += " - " +  affiliation.getName();
+                        formatedStr += " - " + affiliation.getName();
                     }
                 }
             }
             formatedStr += ")";
         }
-
 
 
         return formatedStr;
